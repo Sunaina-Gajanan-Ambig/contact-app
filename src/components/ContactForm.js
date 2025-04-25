@@ -40,11 +40,21 @@ const ContactForm = ({ currentContact, onSubmit, closeForm }) => {
         });
     };
 
+    const deletePhoneNumber = (index) => {
+        const updatedPhoneNumbers = formData.phoneNumbers.filter((_, i) => i !== index);
+        setFormData({ ...formData, phoneNumbers: updatedPhoneNumbers });
+    };
+
     const addEmail = () => {
         setFormData({
             ...formData,
             emails: [...formData.emails, { email: '', type: 'Personal' }],
         });
+    };
+
+    const deleteEmail = (index) => {
+        const updatedEmails = formData.emails.filter((_, i) => i !== index);
+        setFormData({ ...formData, emails: updatedEmails });
     };
 
     const handleSubmit = (e) => {
@@ -69,6 +79,7 @@ const ContactForm = ({ currentContact, onSubmit, closeForm }) => {
                         <option value="Home">Home</option>
                         <option value="Work">Work</option>
                     </select>
+                    <button type="button" onClick={() => deletePhoneNumber(index)}>Delete</button>
                 </div>
             ))}
             <button type="button" onClick={addPhoneNumber}>Add Phone Number</button>
@@ -81,6 +92,7 @@ const ContactForm = ({ currentContact, onSubmit, closeForm }) => {
                         <option value="Personal">Personal</option>
                         <option value="Work">Work</option>
                     </select>
+                    <button type="button" onClick={() => deleteEmail(index)}>Delete</button>
                 </div>
             ))}
             <button type="button" onClick={addEmail}>Add Email</button>
